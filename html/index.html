@@ -1,0 +1,188 @@
+<html>
+  <head>
+    <title>Prototype app</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.css">
+    <style>
+      .header {
+        margin-top: 1em;
+        margin-bottom: 2em;
+      }
+
+      .logo {
+        font-size: 2em;
+        font-weight: bolder;
+      }
+
+      .timer {
+        margin-top: 5px;
+        font-size: 1.5em;
+      }
+
+      .question-name {
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+
+      .question-header {
+        margin-bottom: 0.5em;
+      }
+
+      .question-content {
+        margin-bottom: 2em;
+      }
+
+      .answer-title {
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+
+      .answer-placeholder {
+        width: 120px;
+        display: inline-block;
+        border-bottom: 2px solid black;
+        height: 24px;
+      }
+
+      .answer-row {
+        margin-bottom: 1em;
+      }
+
+      .keyboard {
+        text-align: center;
+      }
+
+      .keyboard .key{
+        border: 1px solid black;
+        border-radius: 5px;
+        margin-left: 5px;
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        display: inline-block;
+        width: 39px;
+      }
+
+      .keyboard .key:hover{
+        background-color: gray;
+      }
+
+      .keyboard-line {
+        margin-bottom: 10px;
+      }
+
+      .keyboard-row {
+        margin-bottom: 2em;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="row header">
+                <div class="col-md-3">
+                  <div class="logo">Listen&Learn</div>
+                </div>
+                <div class="col-md-9">
+                  <div class='timer pull-right'>
+                    <i class="fa fa-clock-o"></i>&nbsp;30
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+          <div class="row">
+            <div class="col-md-8">
+
+
+
+              <div class="row question-header">
+                <div class="col-md-5">
+                  <span class="question-name">Question 1</span>
+                  <a class="btn btn-default btn-sm"><i class="fa fa-play"></i></a>
+                </div>
+                <div class="col-md-7">
+                  <div class="navigation-buttons pull-right">
+                    <a class="btn btn-default"><i class="fa fa-caret-left"></i></a>
+                    <a class="btn btn-default"><i class="fa fa-caret-right"></i></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row question-content">
+                <div class="col-md-12">
+                  <p>Angular is an open source web application framework, focused on developer productivity, speed, and ___ .</p>
+                </div>
+              </div>
+
+              <div class='row answer-row'>
+                <div class='col-md-3'>
+                  <div class='answer-title'>Answer:</div>
+                </div>
+                <div class='col-md-9'>
+                  <div class='answer-placeholder'></div>
+                  <i class='fa fa-times fa-2x'></i>
+                </div>
+              </div>
+
+              <div class='row keyboard-row'>
+                <div class='col-md-12'>
+                  <div class="row keyboard">
+                    <div class="col-md-12 keyboard-line">
+                      <span class="key">A</span>
+                      <span class="key">B</span>
+                      <span class="key">C</span>
+                      <span class="key">D</span>
+                      <span class="key">E</span>
+                      <span class="key">F</span>
+                      <span class="key">G</span>
+
+                    </div>
+                    <div class="col-md-12 keyboard-line">
+
+                      <span class="key">H</span>
+                      <span class="key">I</span>
+                      <span class="key">J</span>
+                      <span class="key">M</span>
+                      <span class="key">N</span>
+                      <span class="key">K</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class='row'>
+                <div class='col-md-12'>
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                      <span class="sr-only">60% Complete</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-md-4">
+              <ul class="list-group">
+                <li class="list-group-item active">Question 1</li>
+                <li class="list-group-item">Question 2</li>
+                <li class="list-group-item">Question 3</li>
+                <li class="list-group-item">Question 4</li>
+                <li class="list-group-item">Question 5</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
