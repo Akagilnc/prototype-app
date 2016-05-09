@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {IQuestion} from './all.interface';
 
 @Component({
   selector: 'answer',
@@ -85,5 +86,5 @@ import {Component} from '@angular/core';
   `]
 })
 export class AnswerComponent {
-
+  @Input() question: IQuestion;
 }

@@ -1,4 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {IQuestion} from './all.interface';
+import {ProgressService} from './services/progress.service';
 
 @Component({
   selector: 'question',
@@ -10,15 +12,15 @@ import {Component} from '@angular/core';
     </div>
     <div class="col-md-7">
       <div class="navigation-buttons pull-right">
-        <a class="btn btn-default"><i class="fa fa-caret-left"></i></a>
-        <a class="btn btn-default"><i class="fa fa-caret-right"></i></a>
+        <a class="btn btn-default" (click)="nextQuestion()"><i class="fa fa-caret-left"></i></a>
+        <a class="btn btn-default" (click)="previousQuestion()"><i class="fa fa-caret-right"></i></a>
       </div>
     </div>
   </div>
 
   <div class="row question-content">
     <div class="col-md-12">
-      <p>Angular is an open source web application framework, focused on developer productivity, speed, and ___ .</p>
+      <p>{{ question.question }}</p>
     </div>
   </div>
   `,
@@ -38,5 +40,21 @@ import {Component} from '@angular/core';
   `]
 })
 export class QuestionComponent {
+  @Input('question') question: IQuestion;
 
+  constructor(private dataService: ProgressService) {
+
+  }
+
+  playSound() {
+
+  }
+
+  nextQuestion() {
+    this.dataService.nextQuestion();
+  }
+
+  previousQuestion() {
+    this.dataService.previousQuestion();
+  }
 }

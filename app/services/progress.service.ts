@@ -17,7 +17,7 @@ export class ProgressService {
   }
 
   getActiveQuestion(): IQuestion {
-
+    return this._questions[this._currentQuestionIndex];
   }
 
   getSuccessPercent(): IQuestion {
