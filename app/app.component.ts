@@ -1,7 +1,50 @@
 import {Component} from '@angular/core';
+import {HeaderComponent} from './header.component';
+import {QuestionComponent} from './question.component';
+import {AnswerComponent} from './answer.component';
+import {ProgressBarComponent} from './progress-bar.component';
+import {QuestionListComponent} from './question-list.component';
+
+import {IQuestion} from './all.interface.ts';
+import {ProgressService} from './services/progress.service';
 
 @Component({
     selector: 'my-app',
-    template: '<h1>My First Angular 2 App</h1>'
+    directives: [HeaderComponent, QuestionComponent, AnswerComponent, ProgressBarComponent, QuestionListComponent],
+    template: `
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="row">
+            <div class="col-md-8">
+              <header></header>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+          <div class="row">
+            <div class="col-md-8">
+
+              <question></question>
+
+              <answer></answer>
+
+              <progress-bar></progress-bar>
+
+            </div>
+            <div class="col-md-4">
+              <question-list></question-list>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    `
 })
-export class AppComponent { }
+export class AppComponent {
+  private activeQuestion: IQuestion;
+
+  constructor(private progressService: ProgressService) {
+    this.activeQuestion = this.progressService.getActiveQuestion();
+  }
+}
