@@ -28,13 +28,13 @@ import {DataService} from './services/data.service';
 
               <question [question]="activeQuestion"></question>
 
-              <answer></answer>
+              <answer [question]="activeQuestion"></answer>
 
               <progress-bar></progress-bar>
 
             </div>
             <div class="col-md-4">
-              <question-list></question-list>
+              <question-list [questions]="questions" [active-question]="activeQuestion"></question-list>
             </div>
           </div>
         </div>
@@ -44,9 +44,13 @@ import {DataService} from './services/data.service';
 })
 export class AppComponent {
   private activeQuestion: IQuestion;
+  private questions: Array<IQuestion>;
 
   constructor(private progressService: ProgressService) {
-    this.activeQuestion = this.progressService.getActiveQuestion();
+    this.progressService.activeQuestion().subscribe(question => {
+      this.activeQuestion = question
+    });
+    this.questions = this.progressService.getAllQuestions();
   }
 
 

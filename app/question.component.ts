@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChange} from '@angular/core';
 import {IQuestion} from './all.interface';
 import {ProgressService} from './services/progress.service';
 
@@ -12,8 +12,8 @@ import {ProgressService} from './services/progress.service';
     </div>
     <div class="col-md-7">
       <div class="navigation-buttons pull-right">
-        <a class="btn btn-default" (click)="nextQuestion()"><i class="fa fa-caret-left"></i></a>
-        <a class="btn btn-default" (click)="previousQuestion()"><i class="fa fa-caret-right"></i></a>
+        <a class="btn btn-default" (click)="previousQuestion()"><i class="fa fa-caret-left"></i></a>
+        <a class="btn btn-default" (click)="nextQuestion()"><i class="fa fa-caret-right"></i></a>
       </div>
     </div>
   </div>
@@ -39,12 +39,14 @@ import {ProgressService} from './services/progress.service';
   }
   `]
 })
-export class QuestionComponent {
+export class QuestionComponent implements OnChanges{
   @Input('question') question: IQuestion;
 
   constructor(private dataService: ProgressService) {
 
   }
+
+
 
   playSound() {
 
@@ -57,4 +59,9 @@ export class QuestionComponent {
   previousQuestion() {
     this.dataService.previousQuestion();
   }
+
+  ngOnChanges(changes: {[propName: string]: SimpleChange}) {
+    console.log(changes);
+  }
+
 }

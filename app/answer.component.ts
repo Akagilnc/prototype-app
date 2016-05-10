@@ -1,40 +1,31 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChange} from '@angular/core';
 import {IQuestion} from './all.interface';
-
+import {ProgressService} from './services/progress.service';
+import {NgFor, NgIf} from '@angular/common';
 @Component({
   selector: 'answer',
+  directives: [NgFor],
   template:`
   <div class='row answer-row'>
     <div class='col-md-3'>
       <div class='answer-title'>Answer:</div>
     </div>
     <div class='col-md-9'>
-      <div class='answer-placeholder'></div>
-      <i class='fa fa-times fa-2x'></i>
+      <div class='answer-placeholder'>{{answer}}</div>
+      <i class='fa fa-check fa-2x'></i>
     </div>
   </div>
 
-  <div class='row keyboard-row'>
+  <div class='row keyboard-row' *ngIf="keyboards != null">
     <div class='col-md-12'>
       <div class="row keyboard">
         <div class="col-md-12 keyboard-line">
-          <span class="key">A</span>
-          <span class="key">B</span>
-          <span class="key">C</span>
-          <span class="key">D</span>
-          <span class="key">E</span>
-          <span class="key">F</span>
-          <span class="key">G</span>
+          <span *ngFor="let key of keyboards[0]" class="key" (click)="selectKey(key)">{{key}}</span>
+
 
         </div>
         <div class="col-md-12 keyboard-line">
-
-          <span class="key">H</span>
-          <span class="key">I</span>
-          <span class="key">J</span>
-          <span class="key">M</span>
-          <span class="key">N</span>
-          <span class="key">K</span>
+          <span *ngFor="let key of keyboards[1]" class="key" (click)="selectKey(key)">{{key}}</span>
         </div>
       </div>
     </div>
@@ -85,6 +76,76 @@ import {IQuestion} from './all.interface';
   }
   `]
 })
-export class AnswerComponent {
-  @Input() question: IQuestion;
+export class AnswerComponent implements OnChanges{
+  @Input('question') question: IQuestion;
+  private answer: string = '';
+  private keyboards: Array<Array<string>>;
+
+  constructor(private progressService: ProgressService) {
+    this.keyboards = null;
+    this.question = null;
+  }
+
+  ngOnChanges(changes: {[ propName: string]: SimpleChange}) {
+    if (changes['question'] != null) {
+      this._rearrangeKeyboard();
+    }
+  }
+
+  clear() {
+
+  }
+
+  _rearrangeKeyboard(): void {
+    var array:Array<string> = [];
+    for (var i = 0; i < this.question.answer.length; i++) {
+      var char = this.question.answer[i].toUpperCase();
+      array.push(char);
+    }
+    for (var i = 65; i <= 90; i++) {
+      var char = String.fromCharCode(i);
+      if (array.indexOf(char) == -1) {
+        array.push(char);
+      }
+    }
+    array = array.splice(0, 12);
+    this._shuffleArray(array);
+    var array1 = array.splice(0, 6);
+    array1.push('<')
+    var array2 = array;
+    this.keyboards = [
+      array1,
+      array2
+    ]
+    console.log(this.keyboards);
+  }
+
+  _shuffleArray(array:Array<any>){
+    var count = array.length,
+        randomnumber: number,
+        temp: number;
+    while (count) {
+      randomnumber = Math.random() * count-- | 0;
+      temp = array[count];
+      array[count] = array[randomnumber];
+      array[randomnumber] = temp
+    }
+  }
+
+  selectKey(character: string) {
+    if (character == '<') {
+      if (this.answer.length > 0) {
+        this.answer = this.answer.slice(0, this.answer.length -1);
+      }
+      return;
+    }
+
+    this.answer += character;
+    if (this.answer == this.question.answer) {
+      this.progressService.nextQuestion();
+    }
+  }
+
+
+
 }
