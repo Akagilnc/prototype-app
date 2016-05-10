@@ -7,26 +7,18 @@ import {ProgressService} from './services/progress.service';
   selector: 'question-list',
   template: `
   <ul class="list-group">
-    <li class="list-group-item"
-        *ngFor="let question of questions"
-        [ngClass]="{active: activeQuestion == question}"
-        (click)="setActiveQuestion(question)">
-        {{ question.question }}
-    </li>
   </ul>
   `,
   directives: [NgFor, NgClass]
 })
 export class QuestionListComponent {
-  @Input('active-question') activeQuestion: IQuestion;
-  @Input('questions') questions: Array<IQuestion>;
 
   constructor(private progressService: ProgressService) {
 
   }
 
   setActiveQuestion(question: IQuestion) {
-    this.progressService.setActiveQuestion(question);
+
   }
 
 }
