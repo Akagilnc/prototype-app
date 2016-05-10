@@ -8,10 +8,12 @@ import {QuestionListComponent} from './question-list.component';
 import {IQuestion} from './all.interface.ts';
 import {ProgressService} from './services/progress.service';
 import {DataService} from './services/data.service';
+import {SoundPlayer} from './services/sound-player.service';
+
 @Component({
     selector: 'my-app',
     directives: [HeaderComponent, QuestionComponent, AnswerComponent, ProgressBarComponent, QuestionListComponent],
-    providers: [ProgressService, DataService],
+    providers: [ProgressService, DataService, SoundPlayer],
     template: `
     <div class="container">
       <div class="row">

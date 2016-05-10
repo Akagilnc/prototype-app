@@ -1,14 +1,15 @@
 import {Component, Input, OnChanges, SimpleChange} from '@angular/core';
 import {IQuestion} from './all.interface';
 import {ProgressService} from './services/progress.service';
+import {SoundPlayer} from './services/sound-player.service';
 
 @Component({
   selector: 'question',
   template: `
   <div class="row question-header">
     <div class="col-md-5">
-      <span class="question-name">Question 1</span>
-      <a class="btn btn-default btn-sm"><i class="fa fa-play"></i></a>
+      <span class="question-name">Question {{question.position}}</span>
+      <a class="btn btn-default btn-sm"><i class="fa fa-play" (click)='playSound()'></i></a>
     </div>
     <div class="col-md-7">
       <div class="navigation-buttons pull-right">
@@ -41,15 +42,15 @@ import {ProgressService} from './services/progress.service';
 })
 export class QuestionComponent implements OnChanges{
   @Input('question') question: IQuestion;
-
-  constructor(private dataService: ProgressService) {
+  private _audio: any;
+  constructor(private dataService: ProgressService,
+              private soundPlayer: SoundPlayer) {
 
   }
 
-
-
   playSound() {
-
+    if (!this.question) return;
+    this.soundPlayer.play(this.question.audioFile);
   }
 
   nextQuestion() {
@@ -61,7 +62,11 @@ export class QuestionComponent implements OnChanges{
   }
 
   ngOnChanges(changes: {[propName: string]: SimpleChange}) {
-    console.log(changes);
+    if (changes['question'] != null) {
+      setTimeout(() => {
+        this.playSound();
+      }, 500);
+    }
   }
 
 }
