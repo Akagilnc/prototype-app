@@ -30,7 +30,7 @@ export class ProgressService {
     return this.$activeQuestionObserver;
   }
 
-  private _getActiveQuestion(): IQuestion {
+  public _getActiveQuestion(): IQuestion {
     return this._questions[this._currentQuestionIndex];
   }
 

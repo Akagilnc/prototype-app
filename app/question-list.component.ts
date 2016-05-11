@@ -47,9 +47,12 @@ export class QuestionListComponent {
   }
 
   setActiveQuestion(question: IQuestion) {
-    var activeQuestion = this.progressService.activeQuestion()
+    var activeQuestion = this.progressService._getActiveQuestion()
 
-    this.questionList.push()
+    question = this.questionList.find(activeQuestion[0].title);
+    
+
+
   }
 
 }
