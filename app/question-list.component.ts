@@ -47,10 +47,10 @@ export class QuestionListComponent {
   }
 
   setActiveQuestion(question: IQuestion) {
-    var activeQuestion = this.progressService._getActiveQuestion()
+    var activeQuestion = this.progressService.getActiveQuestion()
 
     question = this.questionList.find(activeQuestion[0].title);
-    
+
 
 
   }
