@@ -1,14 +1,20 @@
+'use strict'
+
 import {Component, Input} from '@angular/core';
 import {NgFor, NgClass} from '@angular/common';
 import {IQuestion} from './all.interface.ts';
 import {ProgressService} from './services/progress.service';
+import {DataService} from "./services/data.service";
+
+var dataService = require("./services/data.service.ts")
+
 
 @Component({
   selector: 'question-list',
   template: `
   <ul class="list-group">
     <div class="list-group">
-      <a href="#" class="list-group-item active">
+     <!-- <a href="#" class="list-group-item active">
         
         Questions 1 
         <span class="glyphicon glyphicon-ok"></span>
@@ -21,7 +27,9 @@ import {ProgressService} from './services/progress.service';
       </a>
       <a href="#" class="list-group-item"> Questions 3</a>
       <a href="#" class="list-group-item"> Questions 4</a>
-      <a href="#" class="list-group-item"> Questions 5</a>
+      <a href="#" class="list-group-item"> Questions 5</a> !-->
+      <a href="#" class="list-group-item" *ngFor="let displayQuestion of questionList">
+      {{displayQuestion.title}}</a>
     
     </div>
   </ul>
@@ -29,13 +37,19 @@ import {ProgressService} from './services/progress.service';
   directives: [NgFor, NgClass]
 })
 export class QuestionListComponent {
+  @Input('question') question: IQuestion
+  public questionList = this.progressService.getAllQuestions()
+
+
 
   constructor(private progressService: ProgressService) {
 
   }
 
   setActiveQuestion(question: IQuestion) {
+    var activeQuestion = this.progressService.activeQuestion()
 
+    this.questionList.push()
   }
 
 }
